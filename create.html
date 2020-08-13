@@ -1,50 +1,236 @@
 <html>
     <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <title>Create Data</title>
 
         <style>
-            body{
-                background-color: aqua;
-                color: white;
-                border-color: black;
-                text-align: center;
-            }
+        * {box-sizing: border-box;}
 
-            div>.container{
-                margin-top: 15px;
-                background-color: black;
-                border-color: white;
-                padding: 30px;
-                border-radius: 20px;
-                width: 500px;
-                height: 400px;
-                margin:0 auto;
-            }
+        body{
+                background-color: dimgrey;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
 
-            form{
-                display: grid;
-                width: 200px;
-                height: 150px;
-                margin: 0 auto;
-            }
+        span#bold{
+            font-weight: bold;
+            color: ivory;
+        }
 
-            form>label + input{
-                margin: 10px;
-                text-align: center;
-            }
+        header{
+            text-align: center;
+            line-height: 50px; 
+            padding: 10px 10px;
+            background-color:#1b262c;
+            width: 100%;
+            color: ivory;
+        }   
+
+        div#navbar{
+            margin-bottom: 2px;
+            width: 100%;
+            background-color: ivory;
+        } 
+        
+        nav{
+            background-color: #1b262c;
+            border-top: 2px solid ivory;
+        }
+
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        li{
+            float: left;
+            border-right: 0px solid #bbb;
+            border-top: 2px solid white;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover{
+             background-color: #ddd;
+            color: black;
+        }
+
+        div#createEduc{
+            height: 100%;
+            width: 100%;
+            position: relative;
+            background-color:#e7dfd5;
+            padding: 4px;
+            overflow: hidden;
+        }
+
+        div.eduContainer{
+            position: absolute;
+            top: 20%;
+            left: 60%;
+            background-color:#3b6978;
+            padding: 20px;
+            text-justify:distribute-all-lines;
+            text-align:justify;
+            border-radius: 10px;
+        }
+        
+        div#createEduc>h1{
+            text-align: center;
+        }
+
+        div#educ{
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            background-color:#3b6978;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        div#createOrg{
+            height: 100%;
+            width: 100%;
+            position: relative;
+            background-color:#e7dfd5;
+            padding: 4px;
+            border-top: 2px solid #1b262c;
+            border-bottom: 2px solid #1b262c;
+            overflow: hidden;
+        }
+
+        div.orgContainer{
+            position: absolute;
+            top: 20%;
+            left: 60%;
+            background-color:#3b6978;
+            padding: 20px;
+            text-justify:distribute-all-lines;
+            text-align:justify;
+            border-radius: 10px;
+        }
+
+        div#createOrg>h1{
+            text-align: center;
+        }
+
+        div#org{
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            background-color:#3b6978;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        div#createWorks{
+            height: 100%;
+            width: 100%;
+            position: relative;
+            background-color:#e7dfd5;
+            padding: 4px;
+            overflow: hidden;
+        }
+
+        div.workContainer{
+            position: absolute;
+            top: 20%;
+            left: 60%;
+            background-color:#3b6978;
+            padding: 20px;
+            text-justify:distribute-all-lines;
+            text-align:justify;
+            border-radius: 10px;
+        }
+
+        div#createWorks>h1{
+            text-align: center;
+        }
+
+        div#work{
+            position: absolute;
+            top: 9%;
+            left: 14%;
+            background-color:#3b6978;
+            padding: 10px;
+            border-radius: 20px;
+        }
+        
+
+        input{
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: ivory;
+            padding: 15px;
+            outline: none;
+            width: 200px;
+            margin: 5 auto;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+        }
+
+        input:focus {
+        border: 3px solid black;
+        }
+
+        button{
+            background: #092532;
+            color: #fff;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+            display: block;
+            width: 150px;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+            margin: 5 auto;
+        }
+
+        button:hover{
+            background: #092532;
+            color: white;
+            border: 1px solid ivory;
+            cursor: pointer;
+        }
         </style>
 
     </head>
 
     <body>
-    <div id="backto">
-        <button><a href="index.html">Back to Resume</a></button>
-        <button><a href="login.html">Back to Login</a></button>
-    </div>
+        <header><h1>Add Data to Database</h1> </header>
+        <div id="navbar">
+            <nav>
+            <ul>
+                <li><a href="#createEduc">Education</a></li>
+                <li><a href="#createOrg">Organizations</a></li>
+                <li><a href="#createWorks">Works</a></li>
+                <li style="float: right;"><a href="index.html">Back to Resume</a></li>
+                <li style="float: right;"><a href="delete.html">Delete Data</a></li>
+                <li style="float: right;"><a href="update.html">Update Data</a></li>
+                
+
+            </ul>
+            </nav>
+        </div>
     
     <!--create educ-->
     <div id="createEduc">
-        <div class="container">
-            <h1>Add New Education</h1>
+        <h1>Add New Education</h1>
+        <div id="educ"></div>
+        <div class="eduContainer">
+            
             <div id="formEduc">
                 <label for="degree"><b>Degree</b></label>
                 <input type="text" placeholder="Enter Degree" name="degree" id="degree" required>
@@ -66,14 +252,16 @@
 
     <!--create org-->
     <div id="createOrg">
-        <div class="container">
-            <h1>Add New Organization</h1>
+        <h1>Add New Organization</h1>
+        <div id="org"></div>
+        <div class="orgContainer">
+            
             <div id="formOrg">
                 <label for="orgName"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="orgName" id="orgName" required>
+                <input type="text" placeholder="Enter Organization" name="orgName" id="orgName" required>
 
                 <label for="orgPos"><b>Position</b></label>
-                <input type="text" placeholder="Enter School" name="orgPos" id="orgPos" required>
+                <input type="text" placeholder="Enter Position" name="orgPos" id="orgPos" required>
 
                 <label for="orgYearStart"><b>Year Started</b></label>
                 <input type="number" placeholder="Enter Year Started" name="orgYearStart" id="orgYearStart" min="1950" required>
@@ -89,14 +277,16 @@
 
     <!--create works-->
     <div id="createWorks">
-        <div class="container">
-            <h1>Add New Organization</h1>
+        <h1>Add New Works</h1>
+        <div id="work"></div>
+        <div class="workContainer">
+            
             <div id="formWorks">
                 <label for="lab"><b>Lab</b></label>
                 <input type="text" placeholder="Enter Lab" name="lab" id="lab" required>
 
                 <label for="worksName"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="worksName" id="worksName" required>
+                <input type="text" placeholder="Enter Name of Work" name="worksName" id="worksName" required>
 
                 <label for="worksYearStart"><b>Year Started</b></label>
                 <input type="number" placeholder="Enter Year Started" name="worksYearStart" id="worksYearStart" min="1950" required>
@@ -133,6 +323,61 @@
 
     var db = firebase.firestore()
 
+           //read
+           var educCont = '';
+       var orgCont = '';
+       var worksCont = '';
+       var linksCont = '';
+            
+            //read educ
+            db.collection("educations").get().then(function(snapshot){
+                snapshot.forEach(function(childSnapshot){
+                    var valEduc = childSnapshot.data();
+                    educCont += '<dl>' + 
+                                '<dt>'+ '<span id="bold">' + "DEGREE: " + '</span>' + valEduc.degree + '</dt>' + 
+                                '<dt>'+ '<span id="bold">' + "SCHOOL: "+ '</span>' + valEduc.school + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR STARTED: "+ '</span>' + valEduc.year_start + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR FINISHED: "+ '</span>' + valEduc.year_end + '</dt>' +
+                                '<dt>'+'<span id="bold">' +  "UID: "  + '</span>'+ childSnapshot.id + '</dt>' +  
+                                '</dl>'
+                   
+                                
+                });
+                $('#educ').append(educCont);
+            });
+
+            //read org
+            db.collection("organizations").get().then(function(snapshot){
+                snapshot.forEach(function(childSnapshot){
+                    var valOrg = childSnapshot.data();
+                    orgCont += '<dl>' + 
+                                '<dt>'+ '<span id="bold">' + "ORGANIZATION: " + '</span>' + valOrg.name + '</dt>' + 
+                                '<dt>'+ '<span id="bold">' + "POSITION: "+ '</span>' + valOrg.position + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR STARTED: "+ '</span>' + valOrg.year_start + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "Year FINISHED: "+ '</span>' + valOrg.year_end + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "UID: "+ '</span>'  + childSnapshot.id + '</dt>' + 
+                                '</dl>'
+                   
+                   
+                });
+                $('#org').append(orgCont);
+            });
+
+            //read works
+            db.collection("works").get().then(function(snapshot){
+                snapshot.forEach(function(childSnapshot){
+                    var valWorks = childSnapshot.data();
+                    worksCont += '<dl>' + 
+                                '<dt>'+ '<span id="bold">' + "LAB: "+ '</span>' + valWorks.lab + '</dt>' + 
+                                '<dt>'+ '<span id="bold">' + "NAME: "+ '</span>' + valWorks.name + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR STARTED: "+ '</span>' + valWorks.year_start + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "Year FINISHED: "+ '</span>' + valWorks.year_end + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "UID: "+ '</span>'  + childSnapshot.id + '</dt>' +  
+                                '</dl>'
+                });
+                $('#work').append(worksCont);
+            });
+
     // ADD TO EDUC FUNCTION
     function createEduc(){
     var degree = document.getElementById("degree").value;
@@ -144,7 +389,7 @@
     
     db.collection("educations").add(newObject).then(function(doc){
     console.log("Item Added with the UID: " + doc.id)
-    document.getElementById("educSuc").innerHTML = "Item has been successfully added with UID: " + doc.id;
+    window.location.reload();
 })
 }
 //END OF ADD TO EDUC FUNCTION
@@ -160,7 +405,7 @@ function createOrg(){
     
     db.collection("organizations").add(newObject).then(function(doc){
     console.log("Item Added with the UID: " + doc.id)
-    document.getElementById("orgSuc").innerHTML = "Item has been successfully added with UID: " + doc.id;
+    window.location.reload();
 })
 }
 //END OF ADD TO ORG FUNCTION
@@ -176,7 +421,7 @@ function createWorks(){
     
     db.collection("works").add(newObject).then(function(doc){
     console.log("Item Added with the UID: " + doc.id)
-    document.getElementById("worksSuc").innerHTML = "Item has been successfully added with UID: " + doc.id;
+    window.location.reload();
 })
 }
 //END OF ADD TO WORKS FUNCTION
