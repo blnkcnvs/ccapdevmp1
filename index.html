@@ -1,242 +1,215 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="style.css" rel="stylesheet">
         <title>Marius' Resume</title>
-
     </head>
 
     <body>
          <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
         
         
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
-
-        <script>
-            
-            // Your web app's Firebase configuration
-            var firebaseConfig = {
-            apiKey: "AIzaSyACueIl-60xm2IDh3n4t8Bdy4vHKdDUMdc",
-            authDomain: "myapdev-project.firebaseapp.com",
-            databaseURL: "https://myapdev-project.firebaseio.com",
-            projectId: "myapdev-project",
-            storageBucket: "myapdev-project.appspot.com",
-            messagingSenderId: "842440182477",
-            appId: "1:842440182477:web:38803d61df0b27c9bf3784"
-  };
-        // Initialize Firebase
-            var defaultProject = firebase.initializeApp(firebaseConfig);
-            
-            var db = firebase.firestore();
-            
-        //read
-        var educCont = '';
-        var orgCont = '';
-        var worksCont = '';
-        var linksCont = '';
+         <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+         <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+ 
+         <script>
              
-             //read educ
-             db.collection("educations").get().then(function(snapshot){
-                 snapshot.forEach(function(childSnapshot){
-                     var valEduc = childSnapshot.data();
-                     educCont += '<dl>' + 
-                                 '<dt>'+ "Degree: " + valEduc.degree + '</dt>' + 
-                                 '<dt>'+ "School: " + valEduc.school + '</dt>' +
-                                 '<dt>'+ "Year Started: " + valEduc.year_start + '</dt>' +
-                                 '<dt>'+ "Year Finished: " + valEduc.year_end + '</dt>' + 
-                                 '</dl>'
-                    
-                                 
-                 });
-                 $('#educ').append(educCont);
-             });
+             // Your web app's Firebase configuration
+             var firebaseConfig = {
+             apiKey: "AIzaSyACueIl-60xm2IDh3n4t8Bdy4vHKdDUMdc",
+             authDomain: "myapdev-project.firebaseapp.com",
+             databaseURL: "https://myapdev-project.firebaseio.com",
+             projectId: "myapdev-project",
+             storageBucket: "myapdev-project.appspot.com",
+             messagingSenderId: "842440182477",
+             appId: "1:842440182477:web:38803d61df0b27c9bf3784"
+   };
+         // Initialize Firebase
+             var defaultProject = firebase.initializeApp(firebaseConfig);
+             
+             var db = firebase.firestore();
+             
+         //read
+         var introCont = '';
+         var educCont = '';
+         var orgCont = '';
+         var worksCont = '';
+         var linksCont = '';
+               
+               //read intro
+               db.collection("intros").get().then(function(snapshot){
+                  snapshot.forEach(function(childSnapshot){
+                      var valIntro = childSnapshot.data();
+                      introCont += '<h1>'+ valIntro.intro1 + '</h1>'+
+                                   '<h2>'+ "A few things about me:" + '</h2>'+
+                                   '<dl>'+ 
+                                   '<dt>'+ valIntro.intro2 + '</dt>'+
+                                   '<dt>'+ valIntro.intro3 + '</dt>'+
+                                   '<dt>'+ valIntro.intro4 + '</dt>'+
+                                   '<dt>'+ valIntro.intro5 + '</dt>'+
+                                   '</dl>'
+                  });
+                  $('#about').append(introCont);
+              });
 
-             //read org
-             db.collection("organizations").get().then(function(snapshot){
-                 snapshot.forEach(function(childSnapshot){
-                     var valOrg = childSnapshot.data();
-                     orgCont += '<dl>' + 
-                                 '<dt>'+ "Organization: " + valOrg.name + '</dt>' + 
-                                 '<dt>'+ "Position: " + valOrg.position + '</dt>' +
-                                 '<dt>'+ "Year Started: " + valOrg.year_start + '</dt>' +
-                                 '<dt>'+ "Year Finished: " + valOrg.year_end + '</dt>' + 
-                                 '</dl>'
-                    
-                    
-                 });
-                 $('#org').append(orgCont);
-             });
-
-             //read works
-             db.collection("works").get().then(function(snapshot){
-                 snapshot.forEach(function(childSnapshot){
-                     var valWorks = childSnapshot.data();
-                     worksCont += '<dl>' + 
-                                 '<dt>'+ "Lab: " + valWorks.lab + '</dt>' + 
-                                 '<dt>'+ "Name: " + valWorks.name + '</dt>' +
-                                 '<dt>'+ "Year Started: " + valWorks.year_start + '</dt>' +
-                                 '<dt>'+ "Year Finished: " + valWorks.year_end + '</dt>' + 
-                                 '</dl>'
-
-                 });
-                 $('#work').append(worksCont);
-             });
-
-            //read contact me links
-            db.collection('links').get().then(function(snapshot){
-                 snapshot.forEach(function(childSnapshot){
-                     var valLinks = childSnapshot.data();
-                     linksCont += '<table>' + 
-                                '<tr>' + '<td>'+ '<a href="https://www.github.com/blnkcnvs" class="fa fa-github">'+ valLinks.github + '</a>'+'</td>' + '</tr>' +
-                                '<tr>' + '<td>'+ '<a href="https://ph.linkedin.com/in/marius-raye-verdan-2926981b3" class="fa fa-linkedin">' + valLinks.linkedin + '</a>' +'</td>' + '</tr>' +
-                                '<tr>' + '<td>'+ '<a href="https://www.twitter.com/mariusverdan" class="fa fa-twitter">' + valLinks.twitter +'</td>' + '</tr>' +  
-                                 '</table>'
-                 });
-                 $('#link').append(linksCont);
-             });
-
-        </script>
-
-        <!--Header-->
-        <header id="header" class="myheader">
+              
+              //read educ
+              db.collection("educations").get().then(function(snapshot){
+                  snapshot.forEach(function(childSnapshot){
+                      var valEduc = childSnapshot.data();
+                      educCont += '<dl>' + 
+                                '<dt>'+ '<span id="bold">' + "DEGREE: " + '</span>' + valEduc.degree + '</dt>' + 
+                                '<dt>'+ '<span id="bold">' + "SCHOOL: "+ '</span>' + valEduc.school + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR STARTED: "+ '</span>' + valEduc.year_start + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR FINISHED: "+ '</span>' + valEduc.year_end + '</dt>' +
+                                '</dl>'
+                     
+                                  
+                  });
+                  $('#educ').append(educCont);
+              });
+ 
+              //read org
+              db.collection("organizations").get().then(function(snapshot){
+                  snapshot.forEach(function(childSnapshot){
+                      var valOrg = childSnapshot.data();
+                      orgCont += '<dl>' + 
+                                '<dt>'+ '<span id="bold">' + "ORGANIZATION: " + '</span>' + valOrg.name + '</dt>' + 
+                                '<dt>'+ '<span id="bold">' + "POSITION: "+ '</span>' + valOrg.position + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR STARTED: "+ '</span>' + valOrg.year_start + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "Year FINISHED: "+ '</span>' + valOrg.year_end + '</dt>' + 
+                                '</dl>'
+                     
+                     
+                  });
+                  $('#org').append(orgCont);
+              });
+ 
+              //read works
+              db.collection("works").get().then(function(snapshot){
+                  snapshot.forEach(function(childSnapshot){
+                      var valWorks = childSnapshot.data();
+                      worksCont += '<dl>' + 
+                                '<dt>'+ '<span id="bold">' + "LAB: "+ '</span>' + valWorks.lab + '</dt>' + 
+                                '<dt>'+ '<span id="bold">' + "NAME: "+ '</span>' + valWorks.name + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR STARTED: "+ '</span>' + valWorks.year_start + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR FINISHED: "+ '</span>' + valWorks.year_end + '</dt>' +
+                                '</dl>'
+ 
+                  });
+                  $('#work').append(worksCont);
+              });
+ 
+             //read contact me links
+             db.collection('links').get().then(function(snapshot){
+                  snapshot.forEach(function(childSnapshot){
+                      var valLinks = childSnapshot.data();
+                      linksCont += '<table>' + 
+                                 '<tr>' + '<td style="font-size: 30px;">'+ '<a href="https://www.github.com/blnkcnvs" class="fa fa-github fa-lg">'+ valLinks.github + '</a>'+'</td>' + '</tr>' +
+                                 '<tr>' + '<td style="font-size: 30px;">'+ '<a href="https://ph.linkedin.com/in/marius-raye-verdan-2926981b3" class="fa fa-linkedin fa-lg">' + valLinks.linkedin + '</a>' +'</td>' + '</tr>' +
+                                 '<tr>' + '<td style="font-size: 30px;">'+ '<a href="https://www.twitter.com/mariusverdan" class="fa fa-twitter fa-lg">' + valLinks.twitter +'</td>' + '</tr>' +  
+                                  '</table>'
+                  });
+                  $('#link').append(linksCont);
+              });
+ 
+         </script>
+        
+        
+        
         <div class="headerup">
             <div class="container">
-                <a href="#home" class="logo">MARIUS</a>
+                <a href="index.html" class="logo">MARIUS</a>
                 <div class="header-right">
-                    <a href="#home">Home</a>
-                    <a href="#about">About Me</a>
-                    <a href="#educs">Education</a>
-                    <a href="#orgs">Organizations</a>
-                    <a href="#works">Works</a>
-                    <a href="#contacts">Contact Me</a>
+                    <a href="#divAbout">About Me</a>
+                    <a href="#divEduc">Education</a>
+                    <a href="#divOrg">Organizations</a>
+                    <a href="#divWork">Works</a>
+                    <a href="#divLink">Contact Me</a>
                     <a class="active" href="login.html">Log In</a>
                 </div>
             </div>
         </div>
-    </header>
 
-        <!-- ======= Welcome Section ======= -->
-        <section id="welcome">
-        <div class="welcome-container">
-        <h1>WELCOME TO MY PAGE!</h1>
-        <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        <!--welcome-->
+    <div id="divWelcome">
+        <div id="welContainer">
+            <h1>Welcome to my Page!</h1>
+            <button><a href="#divAbout">Get Started</a></button>
         </div>
-        </section>
-        <!-- #welcome -->
+    </div>
 
-        <main id="main">
+    <div id="divAbout">
+        <h1>About</h1>
+        <div class="grid-container">
+            <div class="img1">
+                <img src="dlsulogo.png" alt="">
+            </div>
+            <div class="img2">
+                <img src="tech.png" alt="">
+            </div>
+            <div class="img3">
+                <img src="saudi.png" alt="">
+            </div>
+            <div class="img4">
+                <img src="f1.png" alt="">
+            </div>
+        </div>
+        <div id="aboutContainer">
+            <div id="about"></div>
+        </div>
+    </div>
 
-            <!-- ======= About Me Section ======= -->
-            <section id="about" class="about">
-              <div class="container">
-        
-                <div class="section-title">
-                  <h2>About Me</h2>
-                </div>
-        
-                <div class="row">
-                  <div class="col-lg-6 order-1 order-lg-2">
-                    <img src="dlsulogo.png" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1">
-                    <h3>Hi!, I am Marius Raye L. Verdan</h3>
-                    <p class="font-italic">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                      magna aliqua.
-                    </p>
-                    <ul>
-                      <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                      <li><i class="icofont-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                      <li><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                    </ul>
-                    <p>
-                      Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                      culpa qui officia deserunt mollit anim id est laborum
-                    </p>
-                  </div>
-                </div>
-        
+
+
+        <!--create educ-->
+        <div id ="divEduc">
+            <h1>Education</h1>
+            <div id="image">
+              <img src="educ.png" alt="">
               </div>
-            </section><!-- End About Us Section -->
+            <div class="eduContainer">
+            <div id="educ"></div>
+            </div>
+        </div>
 
-            <!--Education-->
-            <section id ="educs" class="educs">
-              <div class="container">
-                <div class="section-title">
-                  <h2>Education</h2>
-                </div>
-                
-                
-                <div]>
-                <img src="dlsulogo.png" class="img-fluid" alt="">
-                </div>
-                
-                
-                <div id="educ"></div>
-                
-                
-                
+        <!--org-->
+        <div id ="divOrg">
+            <h1>Organizations</h1>
+            <div id="image">
+              <img src="org.png" alt="">
               </div>
-            </section>
-
-            <!--Organizations-->
-            <section id="orgs" class="orgs">
-              <div class="container">
-        
-                <div class="section-title">
-                  <h2>Organizations</h2>
-                </div> 
-
-                <div id="org"></div>
+            <div class="orgContainer">
+            <div id="org"></div>
             </div>
-            </section>
+        </div>
 
-            <!--Works-->
-            <section id="works" class="works">
-              <div class="container">
-        
-                <div class="section-title">
-                  <h2>Works</h2>
-                </div>
-                
-                <div id="work">
-                </div>
-                
+        <!--work-->
+        <div id ="divWork">
+            <h1>Works</h1>
+            <div id="image">
+              <img src="works.png" alt="">
+              </div>
+            <div class="workContainer">
+            <div id="work"></div>
             </div>
-            </section>
+        </div>
 
-            <!--Contact Me-->
-            <section id="contacts" class="contacts">
-              <div class="container">
-        
-                <div class="section-title">
-                  <h2>Contact Me</h2>
-                </div> 
-
-                <div id="link"></div>
+        <!--link-->
+        <div id ="divLink">
+            <h1>Contact Me</h1>
+            <div class="linkContainer">
+            <div id="link"></div>
             </div>
-            </section>
-
-            
+        </div>
 
 
 
-
-
-
-        
-          </main>    
     </body>
 </html>

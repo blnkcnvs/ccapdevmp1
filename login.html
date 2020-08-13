@@ -1,10 +1,18 @@
 <html>
 <head>
-  <title>Firebase Login</title>
-  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <title>Admin Login</title>
   <link rel="stylesheet" href="login.css" />
 </head>
 <body>
+
+  <header><h1>Administrator Login</h1> </header>
+  <div id="navbar" class>
+      <nav>
+      <ul>   
+          <li style="float: right;"><a href="index.html">Back to Resume</a></li>
+      </ul>
+      </nav>
+  </div>
 
   <div id="divLogin" class="main-div">
     <h3>Login</h3>
@@ -18,20 +26,14 @@
 
   <div id="divUser" class="loggedin-div">
     <div>
-    <nav>
-      <span onclick="logout()">Logout</span>
-    </nav>
+      <button onclick="logout()">Logout</button>
   </div>
     
   <h3>Welcome Admin</h3>
     <p id="uMail"></p>
-    <table><tr>
-    <th><button><a href="create.html">Create New Data</a></button></th>
-    <th><button><a href="delete.html">Delete Data</a></button></th>
-    <th><button><a href="update.html">Update Introduction and Links</a></button></th>
-    
-    </tr> 
-  </table>
+    <button><a href="create.html">Create New Data</a></button>
+    <button><a href="delete.html">Delete Data</a></button>
+    <button><a href="update.html">Update Introduction and Links</a></button>
   </div>
 
 

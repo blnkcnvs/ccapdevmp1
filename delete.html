@@ -76,14 +76,22 @@
 
         div.edContainer{
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 20%;
+            left: 60%;
             background-color:#3b6978;
-            padding: 10px;
+            padding: 20px;
             text-justify:distribute-all-lines;
             text-align:justify;
             border-radius: 10px;
+        }
+
+        div#educ{
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            background-color:#3b6978;
+            padding: 10px;
+            border-radius: 20px;
         }
 
         div#educs>h1{
@@ -102,14 +110,22 @@
 
         div.orgContainer{
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 20%;
+            left: 60%;
             background-color:#3b6978;
-            padding: 10px;
+            padding: 20px;
             text-justify:distribute-all-lines;
             text-align:justify;
             border-radius: 10px;
+        }
+
+        div#org{
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            background-color:#3b6978;
+            padding: 10px;
+            border-radius: 20px;
         }
 
         div#orgs>h1{
@@ -126,14 +142,22 @@
 
         div.workContainer{
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 20%;
+            left: 60%;
             background-color:#3b6978;
-            padding: 10px;
+            padding: 20px;
             text-justify:distribute-all-lines;
             text-align:justify;
             border-radius: 10px;
+        }
+
+        div#work{
+            position: absolute;
+            top: 8%;
+            left: 18%;
+            background-color:#3b6978;
+            padding: 10px;
+            border-radius: 20px;
         }
 
         div#works>h1{
@@ -241,7 +265,7 @@
                                 '<dt>'+ '<span id="bold">' + "ORGANIZATION: " + '</span>' + valOrg.name + '</dt>' + 
                                 '<dt>'+ '<span id="bold">' + "POSITION: "+ '</span>' + valOrg.position + '</dt>' +
                                 '<dt>'+ '<span id="bold">' + "YEAR STARTED: "+ '</span>' + valOrg.year_start + '</dt>' +
-                                '<dt>'+ '<span id="bold">' + "Year FINISHED: "+ '</span>' + valOrg.year_end + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR FINISHED: "+ '</span>' + valOrg.year_end + '</dt>' +
                                 '<dt>'+ '<span id="bold">' + "UID: "+ '</span>'  + childSnapshot.id + '</dt>' + 
                                 '</dl>'
                    
@@ -258,7 +282,7 @@
                                 '<dt>'+ '<span id="bold">' + "LAB: "+ '</span>' + valWorks.lab + '</dt>' + 
                                 '<dt>'+ '<span id="bold">' + "NAME: "+ '</span>' + valWorks.name + '</dt>' +
                                 '<dt>'+ '<span id="bold">' + "YEAR STARTED: "+ '</span>' + valWorks.year_start + '</dt>' +
-                                '<dt>'+ '<span id="bold">' + "Year FINISHED: "+ '</span>' + valWorks.year_end + '</dt>' +
+                                '<dt>'+ '<span id="bold">' + "YEAR FINISHED: "+ '</span>' + valWorks.year_end + '</dt>' +
                                 '<dt>'+ '<span id="bold">' + "UID: "+ '</span>'  + childSnapshot.id + '</dt>' +  
                                 '</dl>'
                 });
@@ -313,10 +337,8 @@
 
         <div id="educs">
             <h1>Education</h1>
+            <div id="educ"></div>
             <div class="edContainer">
-                <div id="educ"></div>
-           
-
             <div>
                 <div id="delEduc">
                     <label for="idEduc" ><b>Education UID: </b></label>
@@ -331,11 +353,10 @@
         
         <div id="orgs">
             <h1>Organization</h1>
+            <div id="org"></div>
             <div class="orgContainer">
-                <div id="org"></div>
             
-
-        <div>
+            <div>
             <div id="delOrg">
                 <label for="idOrg"><b>Organizations UID: </b></label>
             <input type="text" placeholder="Enter UID" name="idOrg" id="idOrg" required>
@@ -349,11 +370,9 @@
 
     <div id="works">
         <h1>Works</h1>
+        <div id="work"></div>
         <div class="workContainer">
-            <div id="work"></div>
-        
-
-    <div>
+        <div>
         <div id="delWork">
             <label for="idWork"><b>Works UID: </b></label>
         <input type="text" placeholder="Enter UID" name="idWork" id="idWork" required>
