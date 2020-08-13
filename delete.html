@@ -1,0 +1,251 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <title>delete</title>
+
+        <style>
+
+        body{
+            background-color: dimgrey;
+        }
+
+        header{
+            text-align: center;
+            line-height: 50px; 
+            height: 50px;
+            background-color: #dddddd;
+        }    
+        
+        nav{
+            background-color: #DDD;
+            border-top: 2px solid white;
+        }
+
+        h1{
+            color: red;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        li{
+            float: left;
+            border-right: 1px solid #bbb;
+            border-top: 2px solid white;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        div#educs{
+            height: 100%;
+            width: 100%;
+            
+        }
+
+        div.edContainer{
+            background-color: black;
+            padding: 10px;
+            height: 300px;
+            width: 400px;
+            border-radius: 10px;
+            text-align: center;
+            margin:auto;
+        }
+
+        button{
+            margin-top: 5px;
+            padding: 5px;
+            border-style: dashed;
+            border-color: blanchedalmond;
+
+        }
+
+        input{
+            background-color: burlywood;
+            border-radius: 2.5px;
+        }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+        
+        
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+
+        <script>
+            
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+            apiKey: "AIzaSyACueIl-60xm2IDh3n4t8Bdy4vHKdDUMdc",
+            authDomain: "myapdev-project.firebaseapp.com",
+            databaseURL: "https://myapdev-project.firebaseio.com",
+            projectId: "myapdev-project",
+            storageBucket: "myapdev-project.appspot.com",
+            messagingSenderId: "842440182477",
+            appId: "1:842440182477:web:38803d61df0b27c9bf3784"
+  };
+        // Initialize Firebase
+            var defaultProject = firebase.initializeApp(firebaseConfig);
+            
+            var db = firebase.firestore();
+
+            //read
+       var educCont = '';
+       var orgCont = '';
+       var worksCont = '';
+       var linksCont = '';
+            
+            //read educ
+            db.collection("educations").get().then(function(snapshot){
+                snapshot.forEach(function(childSnapshot){
+                    var valEduc = childSnapshot.data();
+                    educCont += '<dl>' + 
+                                '<dt>'+ "Degree: " + valEduc.degree + '</dt>' + 
+                                '<dt>'+ "School: " + valEduc.school + '</dt>' +
+                                '<dt>'+ "Year Started: " + valEduc.year_start + '</dt>' +
+                                '<dt>'+ "Year Finished: " + valEduc.year_end + '</dt>' +
+                                '<dt>'+ "UID: "  + childSnapshot.id + '</dt>' +  
+                                '</dl>'
+                   
+                                
+                });
+                $('#educ').append(educCont);
+            });
+
+            //read org
+            db.collection("organizations").get().then(function(snapshot){
+                snapshot.forEach(function(childSnapshot){
+                    var valOrg = childSnapshot.data();
+                    orgCont += '<dl>' + 
+                                '<dt>'+ "Organization: " + valOrg.name + '</dt>' + 
+                                '<dt>'+ "Position: " + valOrg.position + '</dt>' +
+                                '<dt>'+ "Year Started: " + valOrg.year_start + '</dt>' +
+                                '<dt>'+ "Year Finished: " + valOrg.year_end + '</dt>' +
+                                '<dt>'+ "UID: "  + childSnapshot.id + '</dt>' + 
+                                '</dl>'
+                   
+                   
+                });
+                $('#org').append(orgCont);
+            });
+
+            //read works
+            db.collection("works").get().then(function(snapshot){
+                snapshot.forEach(function(childSnapshot){
+                    var valWorks = childSnapshot.data();
+                    worksCont += '<dl>' + 
+                                '<dt>'+ "Lab: " + valWorks.lab + '</dt>' + 
+                                '<dt>'+ "Name: " + valWorks.name + '</dt>' +
+                                '<dt>'+ "Year Started: " + valWorks.year_start + '</dt>' +
+                                '<dt>'+ "Year Finished: " + valWorks.year_end + '</dt>' +
+                                '<dt>'+ "UID: "  + childSnapshot.id + '</dt>' +  
+                                '</dl>'
+                });
+                $('#work').append(worksCont);
+            });
+
+        
+            function deleteEduc(){
+                var educid = document.getElementById("idEduc").value;
+
+                db.collection('educations').doc(educid).delete().then(function(){
+                    console.log("Item has been deleted");
+                })
+            }
+
+            function deleteOrg(){
+                var orgid = document.getElementById("idOrg").value;
+
+                db.collection('organizations').doc(orgid).delete().then(function(){
+                    console.log("Item has been deleted");
+                })
+            }
+           </script>
+
+        <header><h1>Delete Data from Database</h1> </header>
+        <div id="navbar">
+            <nav>
+            <ul>
+                <li><a href="#educs">Education</a></li>
+                <li><a href="#orgs">Organization</a></li>
+                <li><a href="#works">Works</a></li>
+                <li style="float: right;"><a href="login.html">Back to Login Page</a></li>
+                <li style="float: right;"><a href="index.html">Back to Resume</a></li>
+            </ul>
+            </nav>
+        </div>
+
+
+        <div id="educs">
+            <div class="edContainer">
+                <div><h3>Education</h3></div>
+                <div id="educ"></div>
+           
+
+            <div>
+                <div id="delEduc">
+                    <label for="idEduc"><b>Education UID: </b></label>
+                <input type="text" placeholder="Enter UID" name="idEduc" id="idEduc" required>
+                
+                <button onclick="deleteEduc()">Delete Data from Education</button>
+                </form>
+            </div>
+        </div>    
+        </div> 
+        </div>
+        
+        <div id="orgs">
+            <div class="container">
+                <div><h3>Organizations</h3></div>
+                <div id="org"></div>
+            </div>
+
+        <div>
+            <div id="delOrg">
+                <label for="idOrg"><b>Organizations UID: </b></label>
+            <input type="text" placeholder="Enter UID" name="idOrg" id="idOrg" required>
+            
+            <button onclick="deleteOrg()">Delete Data from Organizations</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <div id="works">
+        <div class="container">
+            <div><h3>Works</h3></div>
+            <div id="work"></div>
+        </div>
+
+    <div>
+        <div id="delWork">
+            <label for="idWork"><b>Works UID: </b></label>
+        <input type="text" placeholder="Enter UID" name="idWork" id="idWork" required>
+        
+        <button onclick="deleteWork()">Delete Data from Works</button>
+        </form>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

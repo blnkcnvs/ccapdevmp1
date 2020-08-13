@@ -1,0 +1,187 @@
+<html>
+    <head>
+
+        <style>
+            body{
+                background-color: aqua;
+                color: white;
+                border-color: black;
+                text-align: center;
+            }
+
+            div>.container{
+                margin-top: 15px;
+                background-color: black;
+                border-color: white;
+                padding: 30px;
+                border-radius: 20px;
+                width: 500px;
+                height: 400px;
+                margin:0 auto;
+            }
+
+            form{
+                display: grid;
+                width: 200px;
+                height: 150px;
+                margin: 0 auto;
+            }
+
+            form>label + input{
+                margin: 10px;
+                text-align: center;
+            }
+        </style>
+
+    </head>
+
+    <body>
+    <div id="backto">
+        <button><a href="index.html">Back to Resume</a></button>
+        <button><a href="login.html">Back to Login</a></button>
+    </div>
+    
+    <!--create educ-->
+    <div id="createEduc">
+        <div class="container">
+            <h1>Add New Education</h1>
+            <div id="formEduc">
+                <label for="degree"><b>Degree</b></label>
+                <input type="text" placeholder="Enter Degree" name="degree" id="degree" required>
+
+                <label for="school"><b>School</b></label>
+                <input type="text" placeholder="Enter School" name="school" id="school" required>
+
+                <label for="edYearStart"><b>Year Started</b></label>
+                <input type="number" placeholder="Enter Year Started" name="edYearStart" id="edYearStart" min="1950" required>
+
+                <label for="edYearGrad"><b>Year Graduated</b></label>
+                <input type="number" placeholder="Enter Year Graduated" name="edYearGrad" id="edYearGrad" min="1950" required>
+                
+                <button onclick="createEduc()">Add Data to Education</button>
+            </div>
+            <div id="educSuc"></div>
+        </div>
+    </div>
+
+    <!--create org-->
+    <div id="createOrg">
+        <div class="container">
+            <h1>Add New Organization</h1>
+            <div id="formOrg">
+                <label for="orgName"><b>Name</b></label>
+                <input type="text" placeholder="Enter Name" name="orgName" id="orgName" required>
+
+                <label for="orgPos"><b>Position</b></label>
+                <input type="text" placeholder="Enter School" name="orgPos" id="orgPos" required>
+
+                <label for="orgYearStart"><b>Year Started</b></label>
+                <input type="number" placeholder="Enter Year Started" name="orgYearStart" id="orgYearStart" min="1950" required>
+
+                <label for="orgYearEnd"><b>Year End</b></label>
+                <input type="number" placeholder="Enter Year Finished" name="orgYearEnd" id="orgYearEnd" min="1950" required>
+                
+                <button onclick="createOrg()">Add Data to Organization</button>
+            </div>
+            <div id="orgSuc"></div>
+        </div>
+    </div>
+
+    <!--create works-->
+    <div id="createWorks">
+        <div class="container">
+            <h1>Add New Organization</h1>
+            <div id="formWorks">
+                <label for="lab"><b>Lab</b></label>
+                <input type="text" placeholder="Enter Lab" name="lab" id="lab" required>
+
+                <label for="worksName"><b>Name</b></label>
+                <input type="text" placeholder="Enter Name" name="worksName" id="worksName" required>
+
+                <label for="worksYearStart"><b>Year Started</b></label>
+                <input type="number" placeholder="Enter Year Started" name="worksYearStart" id="worksYearStart" min="1950" required>
+
+                <label for="worksYearEnd"><b>Year End</b></label>
+                <input type="number" placeholder="Enter Year Finished" name="worksYearEnd" id="worksYearEnd" min="1950" required>
+                
+                <button onclick="createWorks()">Add Data to Works</button>
+            </div>
+            <div id="worksSuc"></div>
+        </div>
+    </div>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+        
+        
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+  https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyACueIl-60xm2IDh3n4t8Bdy4vHKdDUMdc",
+  authDomain: "myapdev-project.firebaseapp.com",
+  databaseURL: "https://myapdev-project.firebaseio.com",
+  projectId: "myapdev-project",
+  storageBucket: "myapdev-project.appspot.com",
+  messagingSenderId: "842440182477",
+  appId: "1:842440182477:web:38803d61df0b27c9bf3784"
+    };
+    firebase.initializeApp(config);
+
+    var db = firebase.firestore()
+
+    // ADD TO EDUC FUNCTION
+    function createEduc(){
+    var degree = document.getElementById("degree").value;
+    var school = document.getElementById("school").value;
+    var year_end = document.getElementById("edYearGrad").value;
+    var year_start = document.getElementById("edYearStart").value;
+
+    var newObject = {degree, school, year_end, year_start}
+    
+    db.collection("educations").add(newObject).then(function(doc){
+    console.log("Item Added with the UID: " + doc.id)
+    document.getElementById("educSuc").innerHTML = "Item has been successfully added with UID: " + doc.id;
+})
+}
+//END OF ADD TO EDUC FUNCTION
+
+// ADD TO ORG FUNCTION
+function createOrg(){
+    var name = document.getElementById("orgName").value;
+    var position = document.getElementById("orgPos").value;
+    var year_end = document.getElementById("orgYearEnd").value;
+    var year_start = document.getElementById("orgYearStart").value;
+
+    var newObject = {name, position, year_end, year_start}
+    
+    db.collection("organizations").add(newObject).then(function(doc){
+    console.log("Item Added with the UID: " + doc.id)
+    document.getElementById("orgSuc").innerHTML = "Item has been successfully added with UID: " + doc.id;
+})
+}
+//END OF ADD TO ORG FUNCTION
+
+// ADD TO WORKS FUNCTION
+function createWorks(){
+    var lab = document.getElementById("lab").value;
+    var name = document.getElementById("worksName").value;
+    var year_end = document.getElementById("worksYearEnd").value;
+    var year_start = document.getElementById("worksYearStart").value;
+
+    var newObject = {lab, name, year_end, year_start}
+    
+    db.collection("works").add(newObject).then(function(doc){
+    console.log("Item Added with the UID: " + doc.id)
+    document.getElementById("worksSuc").innerHTML = "Item has been successfully added with UID: " + doc.id;
+})
+}
+//END OF ADD TO WORKS FUNCTION
+  </script>
+  
+    
+</body>
+</html>

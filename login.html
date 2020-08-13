@@ -1,0 +1,55 @@
+<html>
+<head>
+  <title>Firebase Login</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <div id="divLogin" class="main-div">
+    <h3>Login</h3>
+    <input type="email" placeholder="Email" id="email" />
+    <input type="password" placeholder="Password" id="password" />
+
+    <button onclick="login()">Login to Account</button>
+  </div>
+
+  
+
+  <div id="divUser" class="loggedin-div">
+    <div>
+    <nav>
+      <span onclick="logout()">Logout</span>
+    </nav>
+  </div>
+    
+  <h3>Welcome Admin</h3>
+    <p id="uMail"></p>
+    <table><tr>
+    <th><button><a href="create.html">Create New Data</a></button></th>
+    <th><button><a href="delete.html">Delete Data</a></button></th>
+    <th><button><a href="update.html">Update Introduction and Links</a></button></th>
+    
+    </tr> 
+  </table>
+  </div>
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyACueIl-60xm2IDh3n4t8Bdy4vHKdDUMdc",
+  authDomain: "myapdev-project.firebaseapp.com",
+  databaseURL: "https://myapdev-project.firebaseio.com",
+  projectId: "myapdev-project",
+  storageBucket: "myapdev-project.appspot.com",
+  messagingSenderId: "842440182477",
+  appId: "1:842440182477:web:38803d61df0b27c9bf3784"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="login.js"></script>
+
+</body>
+</html>
